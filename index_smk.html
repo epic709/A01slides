@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Thinkerers Raspberry Pi Workshop</title>
+    <meta name="description" content="Thinkerers maiden Raspberry Pi workshop">
+    <meta name="author" content="Matthew Yeow / Adrian Lai">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h4>www.thinkerers.org</h4>
+		  <h5><i>presents</i></h5>
+          <h1>Raspberry Pi</h1>
+          <a href="http://www.raspberrypi.org/"><img class="rpi-logo" width="284" height="342" src="images/Raspi_Colour_R.png" alt="Raspberry Pi Logo" /></a>
+        </section>
+
+        <section>
+          <h2>Command Line CHALLENGE</h2>
+          <ol class="left" type="1" start="1">
+            <li>What command do you use to create an empty file? (there are two answers!)</li>
+            <li>Make a directory, change to it, and then make a file in it. Then change one level up and run the <code>rmdir</code> command in this directory. You should get an error. Why did you get this error?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Command Line CHALLENGE</h2>
+          <ol class="left" type="1" start="3">
+            <li>What's your computer's name?</li>
+            <li>How do you find out your computer's IP address?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Command Line CHALLENGE</h2>
+          <ol class="left" type="1" start="5">
+            <li>If you have no idea what to type at the command line, what can you do?</li>
+            <li>What does the <code>man</code> command do? When would you use it?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Command Line CHALLENGE</h2>
+          <ol class="left" type="1" start="7">
+            <li>Create a file inside <code>/opt</code> and then move it to your home directory</li>
+            <li>Create two text files and put some text inside each. Save and exit to the command line. How would you display the contents of BOTH files using one single command?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>CHALLENGE COMPLETE!</h2>
+        </section>
+
+        <section>
+          <h2>Some history</h2>
+          <ul>
+            <li>Model A (April 2012)</li>
+            <li>Model B (Oct 2012)
+            <li>Compute Model (April 2014)</li>
+            <li>Model B+ (July 2014)</li>
+            <li>Model A+ (Nov 2014)</li>
+            <li>Version 2 Model B (Feb 2015)</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>What's not in the box?</h2>
+          <ul>
+            <li>Display monitor (duh!)</li>
+            <li>Keyboard &amp; mouse (obviously...)</li>
+            <li>Power supply (via Micro USB port)</li>
+            <li>Storage (microSD card)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Connecting to the Pi</h2>
+        </section>
+
+        <section>
+          <h2>Standalone</h2>
+          <p>Raspberry Pi + Monitor + Keyboard + Mouse</p>
+        </section>
+
+        <section>
+          <h2>Headless</h2>
+          <p>Raspberry Pi + Network + Your Laptop</p>
+        </section>
+
+        <section>
+          <h2>Networking with the Pi</h2>
+          <ul>
+            <li>Built-in Ethernet for wired connections</li>
+            <li>Wireless also supported when attached to a <i>compatible</i> WiFi dongle</li>
+            <li>We will connect to the Pi through a network using SSH</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>SSH</h2>
+          <ul>
+            <li>also called Secure Shell</li>
+            <li>allows remote login to a networked computer</li>
+            <li>uses encryption to secure data communications</li>
+            <li>involves an SSH server (the Raspberry Pi)<br/>and an SSH client (your laptop)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>SSH Clients</h2>
+          <ul>
+            <li>Linux and Mac OS X have a built-in command:<br/><code>ssh</code></li>
+            <li>Windows users can install<br/><code>PuTTY</code></li>
+          </ul>
+          <p class="tip">&nbsp;&nbsp;&nbsp;tip: PuTTY GUI client is also available for Linux</p>
+        </section>
+
+        <section>
+          <h2>Configure laptop</h2>
+          <ul>
+            <li>Set your Ethernet adapter:
+              <pre class="full"><code>  IP Address: 10.1.1.1
+  Subnet mask: 255.255.255.0
+  Default gateway: 10.1.1.1</code></pre>
+            </li>
+            <li class="tip">Windows7 users:
+              <br/><code>- open Network & Sharing Centre -> change adapter settings</code>
+              <br/><code>- right-click Ethernet adapter -> Properties</code>
+              <br/><code>- double-click TCP/IPv4</code>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Connecting via SSH</h2>
+          <ul>
+            <li>Each Pi has been assigned a fixed IP address</li>
+            <li>For Linux and Mac OS X, type:<br/><code>ssh pi@10.1.1.10</code></li>
+            <li>For Windows, run <code>PuTTY</code></br>Hostname = <code>10.1.1.10</code>, Port = <code>22</code></br>Click 'Open'</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Basic CLI &amp; Python</h2>
+        </section>
+
+        <section>
+          <h2>CLI Commands</h2>
+          <ul>
+            <li><code>ls</code> - list directory contents</li>
+            <li><code>pwd</code> - show current directory</li>
+            <li><code>cd</code> - change directory</li>
+            <li><code>mkdir</code> - make directory</li>
+            <li><code>mv</code> - move/rename files</li>
+            <li><code>rm</code> - remove files/directories (careful!)</li>
+            <li><code>sudo</code> - super user privileges</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Python</h2>
+          <ul>
+            <li>is a programming language</li>
+            <li>you create a file (called a Python script) that contains a set of instructions</li>
+            <li>these instructions tell the computer what to do, like read input from the keyboard or print some text to the screen</li>
+            <li>you then pass the script to the Python <i>interpreter</i> which will execute those instructions</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hello Python</h2>
+          <p>Lets write a simple Python script to read input from the keyboard and then print it to the screen</p>
+        </section>
+
+        <section>
+          <h2>Hello Python</h2>
+          <p class="left">1. Create a new directory</p>
+          <pre><code class="bash">mkdir ~/python-intro</code></pre>
+          <p class="left">2. Change to that new directory</p>
+          <pre><code class="bash">cd ~/python-intro</code></pre>
+          <p class="left">3. Create a Python script</p>
+          <pre><code class="bash">nano hello.py</code></pre>
+        </section>
+
+        <section>
+          <h2>Simple Python Program</h2>
+          <p class="left">4. Type in the following</p>
+          <pre class="full"><code class="python">
+name = raw_input("Hi, what is your name? ")
+print("Hello %s, have fun hacking today!" % name)
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Simple Python Program</h2>
+          <p class="left">5. Save the file by pressing Ctrl+X</p>
+          <p class="left">6. When asked to confirm, press Y, then hit ENTER</p>
+          <p class="left">7. Run the Python script by typing:</p>
+          <pre><code class="bash">python hello.py</code></pre>
+        </section>
+
+        <section>
+          <h2>Modifying a Python Program</h2>
+          <p class="left">To edit your Python script, run the following again</p>
+          <pre><code class="bash">nano hello.py</code></pre>
+          <p class="left">Try adding another question and response</p>
+        </section>
+
+        <section>
+          <h2>GPIO and Circuits</h2>
+        </section>
+
+        <section>
+          <h2>What is GPIO</h2>
+          <ul>
+            <li>General-purpose input/output</li>
+            <li>generic pins on an integrated circuit</li>
+            <li>each pin can be configured as input or output</li>
+            <li>input/output values can be high (1) or low (0)</li>
+            <li>exposed as a 20x2 row of pins</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>GPIO on the Pi</h2>
+          <p class="left">The GPIO pins are exposed on the 20x2 pin header of the Pi</p>
+          <img src="images/Raspberry_Pi2_B_pin_header.jpg" alt="Raspberry Pi Pin Header" />
+          <div class="attribution">
+            <span><a href="http://www.adafruit.com/images/970x728/x2358-03.jpg.pagespeed.ic._4CRhHiwti.webp">Image</a> from adafruit.com / cropped from original</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>GPIO Pinout</h2>
+          <p class="left">Pinout on the Pi</p>
+          <p class="left">Note how some of the pins have a specific function</p>
+          <img width="900" height="300" src="images/Raspberry_Pi_B_Plus_pinout.png" alt="Raspberry Pi Pinout" />
+          <div class="attribution">
+            <span><a href="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2012/06/Raspberry-Pi-GPIO-Layout-Model-B-Plus-rotated-2700x900.png">Image</a> by <a href="http://www.raspberrypi-spy.co.uk/">www.raspberrypi-spy.co.uk</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Voltage Supply Rails</h2>
+          <p>The Pi supplies 2 voltage levels: 5V and 3.3V</p>
+          <p>What voltage level to use depends on the component</p>
+        </section>
+
+        <section>
+          <h2>Voltage Supply Rails</h2>
+          <ul>
+            <li>2 x 5-volt pins (red)</li>
+            <li>2 x 3.3-volt pins (orange)</li>
+            <li>8 x ground pins (grey)</li>
+          </ul>
+          <img width="900" height="300" src="images/Raspberry_Pi_B_Plus_pinout.png" alt="Raspberry Pi Pinout" />
+          <div class="attribution">
+            <span><a href="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2012/06/Raspberry-Pi-GPIO-Layout-Model-B-Plus-rotated-2700x900.png">Image</a> by <a href="http://www.raspberrypi-spy.co.uk/">www.raspberrypi-spy.co.uk</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Warning</h2>
+          <p>The GPIO pins on the Pi are NOT 5V tolerant</p>
+          <p>Never connect a 5V pin directly to any other pin</p>
+          <p>as this can permanently damage the Pi</p>
+        </section>
+
+        <section>
+          <h2>Remember</h2>
+          <p>Always ensure the Pi is <strong class="red">turned off</strong> before making any changes to your circuit</p>
+        </section>
+
+        <section>
+          <h2>Turning the Pi Off</h2>
+          <p class="left">1. Run this command</p>
+          <pre><code class="bash">sudo halt</code></pre>
+          <p class="left">2. Wait for the lights to stop flashing</p>
+      <p><h3>or</h3></p>
+          <p class="left">Disconnect the USB power cable / switch off the power socket</p>
+        </section>
+
+        <section>
+          <h2>GPIO Pin Breakout</h2>
+          <img width="50%" height="50%" src="images/Raspberry_Pi2_B_pin_header_breakout.jpg" alt="Raspberry Pi Pin Header" />
+          <div class="attribution">
+            <span><a href="http://www.adafruit.com/images/970x728/x2358-03.jpg.pagespeed.ic._4CRhHiwti.webp">Image</a> from adafruit.com / modified from original</span>
+          </div>
+          <img width="600" height="350" src="images/Breadboard_half_plus_breakout.png" alt="Breadboard Half+ Breakout" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+     	<section>
+          <h2>Download</h2>
+          <p class="left">all the code we will be using from</p>
+          <pre><code class="bash">http://bit.ly/1A3lWd4</code></pre>
+          <p class="left">We will transfer the code to the Pi using a <i>network share</i></p>
+        </section>
+
+        <section>
+        	<h2>Network share</h2>
+        	<ul>
+        		<li>log on to your Pi</li>
+        		<li>from your laptop, open:</li>
+        		<pre><code class="bash">//10.1.1.10/pishare</code></pre>
+        		<li>copy all the files across</li>
+        		<li>move the files to thinkerers directory:
+        		<pre><code class="bash">mv ~/share/* ~/thinkerers</code></pre>
+        	</ul>
+        </section>
+
+        <section>
+          <h2>Controlling an LED with GPIO</h2>
+        </section>
+
+        <section>
+          <img style="border:0" src="images/05_led_gpio.png" alt="LED GPIO" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Controlling an LED with GPIO</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/05-led-gpio.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 05-led-gpio.py</code></pre>
+          <p class="left"><code class="bash">sudo</code> is required when using GPIO</p>
+        </section>
+
+        <section>
+          <h2>LED Patterns</h2>
+        </section>
+
+        <section>
+          <img style="border:0" src="images/05_led_patterns2.png" alt="LED patterns" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>LED Patterns</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/05-led-patterns.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 05-led-patterns.py</code></pre>
+        </section>
+
+        <section>
+          <h2>Reading Input</h2>
+        </section>
+
+        <section>
+          <img src="images/06_switch_input.png" alt="Switch input" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Reading a Switch</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/06-switch-input.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 06-switch-input.py</code></pre>
+          <p class="left">Press the switch and watch the output on the screen</p>
+          <p class="left">To quit the program, press <code class="bash">Ctrl+X</code></p>
+        </section>
+
+        <section>
+          <h2>Reading a Switch</h2>
+          <h3>To Control LED Pattern</h3>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/06-switch-led.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 06-switch-led.py</code></pre>
+          <p class="left">Press the switch and watch the LED patterns change</p>
+        </section>
+
+        <section>
+          <h2>Sensory Madness</h2>
+		  <h4>(inputs)</h4>
+        </section>
+		        
+		<section>
+          <h2>Reading Light</h2>
+        </section>
+
+        <section>
+          <img src="images/07_reading_light.png" alt="Reading light" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Reading Light</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/07-reading-light.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 07-reading-light.py</code></pre>
+          <p class="left">Move your hand over the LDR and watch the reading change</p>
+          <p class="left">To quit the program, press <code class="bash">Ctrl+X</code></p>
+        </section>
+
+        <section>
+          <h2>Reading Temperature</h2>
+        </section>
+
+        <section>
+          <img src="images/08_reading_temp.png" alt="Reading temperature" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Some modules need to be enabled</h2>
+          <p class="left">Run this</p>
+          <pre><code class="bash">
+sudo modprobe w1-gpio
+sudo modprobe w1-therm		  
+		  </code></pre>
+		  <p class="left">Note: this isn't permanent</p>
+        </section>
+
+        <section>
+          <h2>Reading Temperature</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/08-reading-temp.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 08-reading-temp.py</code></pre>
+          <p class="left">Touch the temperature sensor and watch the reading change</p>
+          <p class="left">To quit the program, press <code class="bash">Ctrl+X</code></p>
+        </section>
+		
+        <section>
+          <h2>? Magic Ruler ?</h2>
+        </section>
+		
+        <section>
+          <img src="images/sonar_sensor.png" alt="Sonar sensor" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+		
+        <section>
+          <h2>Sonar Sensor</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/08-sonar-sensor.py</code></pre>
+		  <p class="left">Hold the sensor steady and point it at a nearby flat surface</p>
+          <p class="left">Then execute the script</p>
+          <pre><code class="bash">sudo python 08-sonar-sensor.py</code></pre>
+          
+        </section>
+        <section>
+          <h2>Motor-ing</h2>
+		      <h4>(outputs)</h4>
+        </section>
+
+        <section>
+          <img src="images/09_dc_motor.png" alt="DC Motor" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Controlling a DC Motor</h2>
+          <p class="left">Script to use:</p>
+          <pre><code class="bash">~/thinkerers/09-dc-motor.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 09-dc-motor.py</code></pre>
+        </section>
+
+		    <section>
+          <h2>Caution</h2>
+          <p>Take care removing the L293D</p>
+          <p>Slowly wedge it out by gripping the sides</p>
+          <p>Try not to bend the <strong class="red">sharp</strong> pins</p>
+        </section>
+		
+		    <section>
+          <h2>Controlling a Servo Motor</h2>
+          <ul>
+            <li>The Pi isn't actually good for servo control</li>
+            <li>Only one hardware PWM pin - GPIO18</li>
+            <li>Linux OS interrupts the pulse generated</li>
+		        <li>Both software and hardware solutions available</li>
+          </ul>
+          <p class="left tip">tip: check out ServoBlaster</p>
+        </section>
+
+		    <section>
+          <img src="images/servo_motor.png" alt="Servo Motor" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+		
+        <section>
+          <h2>Controlling a Servo Motor</h2>
+          <p class="left">Script to use:</p>
+          <pre><code class="bash">~/thinkerers/09-servo-motor.py</code></pre>
+          <p class="left">Execute the script</p>
+          <pre><code class="bash">sudo python 09-servo-motor.py</code></pre>
+		  <p class="left">Enter angle between 0 and 180 degrees</p>
+        </section>
+
+        <section>
+          <h2>Automation</h2>
+        </section>
+
+		<section>
+		  <p>Input + Output = AUTOMATION</p>
+		  <p>Try to combine what you just learnt</p>
+		  <p>Can you control the DC motor based on light?</p>
+		  <p>Example: bright = move forwards</p>
+		  <p>&nbsp;&nbsp;&nbsp;&nbsp;dim = move backwards</p>
+		</section>
+		
+        <section>
+          <h2>Controlling a Motor</h2>
+          <h3>Based on Light</h3>
+          <p class="left">Open the *untested* script</p>
+          <pre><code class="bash">~/thinkerers/10-light-dc-motor.py</code></pre>
+          <p class="left">Fix it! Then</p>
+          <pre><code class="bash">sudo python 10-light-dc-motor.py</code></pre>
+          <p class="left">Slowly cover / uncover the LDR and see if you can reverse the motor's direction</p>
+        </section>
+
+        <section>
+          <h2>Remote Monitoring and Control</h2>
+        </section>
+
+        <section>
+          <h2>Run a Simple File Server</h2>
+          <p class="left">Create a directory</p>
+          <pre><code class="bash">mkdir ~/website</code></pre>
+          <p class="left">Change to that directory</p>
+          <pre><code class="bash">cd ~/website</code></pre>
+          <p class="left">Create a test file, enter some text, and save it</p>
+          <pre><code class="bash">nano test.txt</code></pre>
+          <p class="left">Run this</p>
+          <pre><code class="bash">sudo python -m SimpleHTTPServer 80</code></pre>
+        </section>
+
+        <section>
+          <h2>Run a Simple File Server</h2>
+          <p class="left">Enter your Pi's IP address into your browser's address bar:</p>
+          <pre><code>http://10.1.1.XXX/</code></pre>
+          <p class="left">Can you see the test file you created?</p>
+        </section>
+
+        <section>
+          <h2>Basic Web Server</h2>
+          <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/11-basic-server.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 11-basic-server.py</code></pre>
+          <p class="left">In your browser, go to</p>
+		  <pre><code>http://10.1.1.XXX/any-text-you-like</code></pre>
+        </section>
+
+        <section>
+          <h2>Web Server + Sensor</h2>
+          <p class="left">Load temperature sensor modules</p>
+		  <pre><code class="bash">
+sudo modprobe w1-gpio
+sudo modprobe w1-therm		  
+		  </code></pre>
+		  <p class="left">Check if module detected the sensor</p>
+		  <pre><code class="bash">cd /sys/bus/w1/devices</code></pre>
+		  <p class="left">A file with the name "28xxxxxxxx" should exist
+		</section>
+		
+		<section>
+          <img src="images/08_reading_temp.png" alt="Light and Temp again" />
+          <div class="attribution">
+            <span>Image created with <a href="http://fritzing.org/">Fritzing</a></span>
+          </div>
+        </section>
+
+		<section>
+		  <p class="left">Get the script</p>
+          <pre><code class="bash">~/thinkerers/11-sensor-server.py</code></pre>
+          <p class="left">And run it</p>
+          <pre><code class="bash">sudo python 11-sensor-server.py</code></pre>
+          <p class="left">Access your Pi's IP address in your browser</p>
+        </section>
+
+        <section>
+          <h2>After the Workshop</h2>
+        </section>
+
+        <section>
+          <h2>Changing The Pi's IP Address</h2>
+          <p class="left">Edit the configuration file</p>
+          <pre><code class="bash">sudo nano /etc/network/interfaces</code></pre>
+          <p class="left">Modify these lines to match your local network</p>
+          <pre><code class="bash"
+>address 10.1.1.XXX
+gateway 10.1.1.1
+          </code></pre>
+          <p class="left">For example:</p>
+          <pre><code class="bash"
+>address 192.168.0.XXX
+gateway 192.168.0.1
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Changing The Wireless Network</h2>
+          <p class="left">Edit the configuration file</p>
+          <pre class="full"><code class="bash">sudo nano /etc/wpa_supplicant/wpa_supplicant.conf</code></pre>
+          <p class="left">Modify the ssid and psk values to match your local network</p>
+          <p class="left">For example:</p>
+          <pre><code class="bash"
+>ssid="MyWirelessSSID"
+psk="MySecretPassword"
+          </code></pre>
+        </section>
+
+		<section>
+          <h2>Recommended resources</h2>
+          <h3>Too many to choose!</h3>
+        </section>
+		
+        <section>
+          <h1>The End</h1>
+          <h3>Thanks for coming!</h3>
+          <h5>mind doing a short survey?</h5>
+        </section>
+
+        <section class="attribution">
+          <img alt="Creative Commons License" src="images/cc-by-sa.svg" width="88" height="31" />
+          <p>This work by <em xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Adrian Lai</em> is licensed under a<br /><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a></p>
+          <hr />
+          <a rel="license" href="http://creativecommons.org/publicdomain/mark/1.0/"><img src="images/publicdomain.svg" alt="Public Domain Mark" /></a>
+          <p>Python code samples provided are free of known copyright restrictions</p>
+          <hr />
+          <p>The Raspberry Pi and the Raspberry Pi Logo<br \>are trademarks of the Raspberry Pi Foundation</p>
+          <p>All other registered trademarks are property of their respective owners</p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        ]
+      });
+    </script>
+  </body>
+</html>

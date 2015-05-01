@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.reveal h1 { font-size: 3.77em; }
+.reveal h2 { font-size: 2.4em; }
+.reveal h3 { font-size: 2em; }
+.reveal h4 { font-size: 1.5em; }
+.reveal p { font-size: 1.25em; }
+.reveal p.left { text-align: left; }
+.reveal pre.full { width: 100%; }
+.reveal pre code { font-size: 1.66em; line-height: 1em; color: #FFFFFF}
+.reveal li { font-size: 1.25em; line-height: 1.5em; }
+.reveal .red { color: #7A1B1B}
+.reveal .tip { text-align: left; font-size: 1em; font-style: italic; }
+
+.reveal img.rpi-logo {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.reveal .attribution {
+  position: relative;
+}
+.reveal .attribution span {
+  position: absolute;
+  top: -1.5em;
+  right: 0;
+  font-size: 0.5em;
+  color: #777;
+}
+
+.reveal .attribution a, .reveal .attribution a:hover {
+  color: #789;
+}
+
+.reveal .attribution img {
+  border-width: 0;
+}
+
+.reveal .attribution p {
+  font-size: 0.75em;
+}
+
+.reveal .attribution em {
+  font-style: normal;
+  text-decoration: underline;
+}
+
